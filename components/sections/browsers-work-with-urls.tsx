@@ -14,7 +14,7 @@ export default function BrowsersWorkWithUrls() {
                 <li>
                     A random text like{" "}
                     <Highlight variant="slate">pizza</Highlight> will be
-                    transformed into a search URL like{" "}
+                    transformed into a "search" URL like{" "}
                     <Highlight variant="blue">
                         https://google.com/search?q=pizza
                     </Highlight>{" "}
