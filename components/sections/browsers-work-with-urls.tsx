@@ -13,22 +13,22 @@ export default function BrowsersWorkWithUrls() {
             <ul className="list-disc list-inside leading-7">
                 <li>
                     A random text like{" "}
-                    <Highlight variant="quoted-string">pizza</Highlight> will be
+                    <Highlight variant="slate">pizza</Highlight> will be
                     transformed into a search URL like{" "}
-                    <Highlight variant="url">
+                    <Highlight variant="blue">
                         https://google.com/search?q=pizza
                     </Highlight>{" "}
                     (or{" "}
-                    <Highlight variant="url">
+                    <Highlight variant="blue">
                         https://duckduckgo.com/?q=pizza
                     </Highlight>{" "}
                     depending on your preferences).
                 </li>
                 <li>
                     A domain name like{" "}
-                    <Highlight variant="quoted-string">example.com</Highlight>{" "}
-                    will be normalized as a full URL:{" "}
-                    <Highlight variant="url">https://example.com</Highlight>
+                    <Highlight variant="slate">example.com</Highlight> will be
+                    normalized as a full URL:{" "}
+                    <Highlight variant="blue">https://example.com</Highlight>
                 </li>
             </ul>
             <p>

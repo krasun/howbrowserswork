@@ -35,7 +35,7 @@ Accept: text/html
             <p>
                 One of the headers is the host header. It is used to identify
                 the server to which the request is sent:{" "}
-                <Highlight variant="url">{host}</Highlight>.
+                <Highlight variant="blue">{host}</Highlight>.
             </p>
         </Section>
     );
