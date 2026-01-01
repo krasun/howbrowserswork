@@ -1,3 +1,4 @@
+import Section from "@/components/section";
 import BrowsersWorkWithUrls from "@/components/sections/browsers-work-with-urls";
 import TurningAUrlIntoAnHttpRequest from "@/components/sections/turning-a-url-into-an-http-request";
 

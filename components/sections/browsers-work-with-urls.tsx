@@ -12,9 +12,9 @@ export default function BrowsersWorkWithUrls() {
             </p>
             <ul className="list-disc list-inside leading-7">
                 <li>
-                    A random string like{" "}
-                    <Highlight variant="quoted-string">"pizza"</Highlight> will
-                    be transformed into a search URL like{" "}
+                    A random text like{" "}
+                    <Highlight variant="quoted-string">pizza</Highlight> will be
+                    transformed into a search URL like{" "}
                     <Highlight variant="url">
                         https://google.com/search?q=pizza
                     </Highlight>{" "}
@@ -26,7 +26,7 @@ export default function BrowsersWorkWithUrls() {
                 </li>
                 <li>
                     A domain name like{" "}
-                    <Highlight variant="quoted-string">"example.com"</Highlight>{" "}
+                    <Highlight variant="quoted-string">example.com</Highlight>{" "}
                     will be normalized as a full URL:{" "}
                     <Highlight variant="url">https://example.com</Highlight>
                 </li>

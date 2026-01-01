@@ -3,6 +3,10 @@
 import { useEffect, useMemo, useState } from "react";
 import AddressBar from "../address-bar";
 
+interface UrlToHttpExampleProps {
+    onHostChange?: (host: string) => void;
+}
+
 const isValidHttpUrl = (value: string) => {
     try {
         const parsed = new URL(value);
@@ -21,7 +25,7 @@ const formatHttpRequest = (url: URL) => {
     ].join("\n");
 };
 
-export default function UrlToHttpExample() {
+export default function UrlToHttpExample({ onHostChange }: UrlToHttpExampleProps) {
     const [inputValue, setInputValue] = useState("https://example.com");
     const [outputValue, setOutputValue] = useState("");
     const [animateResult, setAnimateResult] = useState(false);
@@ -41,6 +45,7 @@ export default function UrlToHttpExample() {
 
         const parsed = new URL(trimmed);
         setOutputValue(formatHttpRequest(parsed));
+        onHostChange?.(parsed.host);
     };
 
     useEffect(() => {

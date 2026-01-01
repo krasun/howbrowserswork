@@ -1,8 +1,17 @@
+"use client";
+
 import ExampleContainer from "@/components/example-container";
 import UrlToHttpExample from "@/components/examples/url-to-http-example";
 import Section from "@/components/section";
+import { useState } from "react";
+import Highlight from "@/components/highlight";
 
 export default function TurningAUrlIntoAnHttpRequest() {
+    const [host, setHost] = useState("example.com");
+    const headers = `Host: ${host}
+Accept: text/html
+`;
+
     return (
         <Section title="Turning a URL into an HTTP request">
             <p>
@@ -17,8 +26,17 @@ export default function TurningAUrlIntoAnHttpRequest() {
                 <kbd>Enter</kbd> (or click the "Go" button):
             </p>
             <ExampleContainer>
-                <UrlToHttpExample />
+                <UrlToHttpExample onHostChange={setHost} />
             </ExampleContainer>
+            <p>HTTP requests have headers in the format like:</p>
+            <pre className="bg-slate-100 p-4 rounded-lg">
+                <code>{headers}</code>
+            </pre>
+            <p>
+                One of the headers is the host header. It is used to identify
+                the server to which the request is sent:{" "}
+                <Highlight variant="url">{host}</Highlight>.
+            </p>
         </Section>
     );
 }
