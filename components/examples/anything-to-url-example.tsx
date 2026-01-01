@@ -81,11 +81,11 @@ export default function AnythingToUrlExample() {
                         {outputValue}
                     </div>
                     <div className="flex flex-col items-center gap-2 sm:flex-row">
-                        <Highlight variant="quoted-string">
+                        <Highlight variant="slate">
                             &quot;{inputValue}&quot;
                         </Highlight>
                         <span className="text-slate-400">→</span>
-                        <Highlight variant="url">{outputValue}</Highlight>
+                        <Highlight variant="blue">{outputValue}</Highlight>
                     </div>
                     <div className=" text-slate-400">
                         {transformKind === "search"
