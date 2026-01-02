@@ -42,14 +42,50 @@ export default function ResolveServerAddressExample() {
         }
         setIsLoading(true);
         setError("");
-        timeoutRef.current = window.setTimeout(() => {
-            const records = dnsFixtures[normalizedHost] ?? [];
-            setIps(records);
-            if (records.length === 0) {
-                setError("No records found.");
+        if (dnsFixtures[normalizedHost]) {
+            timeoutRef.current = window.setTimeout(() => {
+                const records = dnsFixtures[normalizedHost] ?? [];
+                setIps(records);
+                if (records.length === 0) {
+                    setError("No A records found.");
+                }
+                setIsLoading(false);
+            }, 500);
+            return;
+        }
+
+        fetch(
+            `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(
+                normalizedHost
+            )}&type=A`,
+            {
+                headers: { Accept: "application/dns-json" },
             }
-            setIsLoading(false);
-        }, 500);
+        )
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("DNS lookup failed.");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                const answers = Array.isArray(data?.Answer) ? data.Answer : [];
+                const records = answers
+                    .filter(
+                        (answer: { type: number; data: string }) =>
+                            answer.type === 1
+                    )
+                    .map((answer: { data: string }) => answer.data);
+                setIps(records);
+                if (records.length === 0) {
+                    setError("No A records found.");
+                }
+            })
+            .catch(() => {
+                setError("No A records found.");
+                setIps([]);
+            })
+            .finally(() => setIsLoading(false));
     };
 
     useEffect(() => {
