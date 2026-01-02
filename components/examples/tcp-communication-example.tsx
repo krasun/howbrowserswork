@@ -31,6 +31,7 @@ export default function TcpCommunicationExample() {
     const [networkAlert, setNetworkAlert] = useState(false);
     const [packetTick, setPacketTick] = useState(0);
     const [hasDisrupted, setHasDisrupted] = useState(false);
+    const [hasStartedOnce, setHasStartedOnce] = useState(false);
     const packetIdRef = useRef(0);
     const isSendingRef = useRef(isSending);
     const sequenceRef = useRef(sequenceState);
@@ -166,6 +167,9 @@ export default function TcpCommunicationExample() {
         setPacketPosition(null);
         setSequenceState(initialSequence);
         packetIdRef.current += 1;
+        if (!hasStartedOnce) {
+            setHasStartedOnce(true);
+        }
         isSendingRef.current = true;
         setIsSending(true);
         sendPacket(direction);
@@ -233,19 +237,21 @@ export default function TcpCommunicationExample() {
                     </span>
                 </div>
                 <div className="flex items-center gap-2">
-                    <Button
-                        onClick={handleStart}
-                        disabled={isSending && !hasDisrupted}
-                        className={[
-                            isSending && !hasDisrupted ? "opacity-60" : "",
-                        ]
-                            .filter(Boolean)
-                            .join(" ")}
-                    >
-                        {isSending && hasDisrupted
-                            ? "Restart sending packets"
-                            : "Start sending packets"}
-                    </Button>
+                    {!hasStartedOnce || hasDisrupted ? (
+                        <Button
+                            onClick={handleStart}
+                            disabled={isSending && !hasDisrupted}
+                            className={[
+                                isSending && !hasDisrupted ? "opacity-60" : "",
+                            ]
+                                .filter(Boolean)
+                                .join(" ")}
+                        >
+                            {hasDisrupted
+                                ? "Restart sending packets"
+                                : "Start sending packets"}
+                        </Button>
+                    ) : null}
                     <Button
                         onClick={handleDisrupt}
                         disabled={!isSending}

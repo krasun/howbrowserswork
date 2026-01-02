@@ -26,6 +26,10 @@ export default function EstablishingTheTcpConnection() {
                 the missing bytes. This is how TCP keeps data ordered and
                 reliable once the connection is established.
             </p>
+            <p>
+                Start sending packets and try to disrupt the network to see what
+                happens.
+            </p>
             <ExampleContainer>
                 <TcpCommunicationExample />
             </ExampleContainer>
