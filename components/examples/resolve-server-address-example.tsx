@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { dnsFixtures } from "@/components/fixtures";
 
 const normalizeHost = (value: string) => {
     const trimmed = value.trim();
@@ -17,6 +18,7 @@ export default function ResolveServerAddressExample() {
     const [isLoading, setIsLoading] = useState(false);
     const [ips, setIps] = useState<string[]>([]);
     const [error, setError] = useState("");
+    const timeoutRef = useRef<number | null>(null);
 
     const normalizedHost = useMemo(() => normalizeHost(host), [host]);
     const isValid = normalizedHost.length > 0 && isValidHost(normalizedHost);
@@ -35,46 +37,28 @@ export default function ResolveServerAddressExample() {
             return;
         }
 
-        const controller = new AbortController();
+        if (timeoutRef.current) {
+            window.clearTimeout(timeoutRef.current);
+        }
         setIsLoading(true);
         setError("");
-        fetch(
-            `https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(
-                normalizedHost
-            )}&type=A`,
-            {
-                headers: { Accept: "application/dns-json" },
-                signal: controller.signal,
-            }
-        )
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("DNS lookup failed.");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                const answers = Array.isArray(data?.Answer) ? data.Answer : [];
-                const records = answers
-                    .filter(
-                        (answer: { type: number; data: string }) =>
-                            answer.type === 1
-                    )
-                    .map((answer: { data: string }) => answer.data);
-                setIps(records);
-                if (records.length === 0) {
-                    setError("No A records found.");
-                }
-            })
-            .catch((err) => {
-                if (err instanceof DOMException && err.name === "AbortError") {
-                    return;
-                }
+        timeoutRef.current = window.setTimeout(() => {
+            const records = dnsFixtures[normalizedHost] ?? [];
+            setIps(records);
+            if (records.length === 0) {
                 setError("No A records found.");
-                setIps([]);
-            })
-            .finally(() => setIsLoading(false));
+            }
+            setIsLoading(false);
+        }, 500);
     };
+
+    useEffect(() => {
+        return () => {
+            if (timeoutRef.current) {
+                window.clearTimeout(timeoutRef.current);
+            }
+        };
+    }, []);
 
     return (
         <div className="rounded-xl border border-slate-200 bg-slate-950 px-4 py-3 text-sm text-slate-100 shadow-sm">
