@@ -17,7 +17,7 @@ export default function Button({
         <button
             type={type}
             className={[
-                "hover:cursor-pointer rounded-md bg-blue-500 px-3 py-1 text-sm font-bold text-white ring-0 disabled:opacity-60",
+                "hover:cursor-pointer rounded-md bg-blue-500 px-3 py-1 text-sm font-bold text-white ring-0 disabled:opacity-60 transition-transform duration-150 active:scale-95",
                 disabled ? "opacity-60" : "",
                 className,
             ]
