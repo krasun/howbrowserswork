@@ -1,10 +1,10 @@
 import Footer from "@/components/footer";
-import Sidebar from "@/components/sidebar";
 import { SectionsProgressProvider } from "@/components/sections-progress";
 import BrowsersWorkWithUrls from "@/components/sections/browsers-work-with-urls";
 import EstablishingTheTcpConnection from "@/components/sections/establishing-the-tcp-connection";
 import ResolvingTheServerAddress from "@/components/sections/resolving-the-server-address";
 import TurningAUrlIntoAnHttpRequest from "@/components/sections/turning-a-url-into-an-http-request";
+import Sidebar from "@/components/sidebar";
 
 type SectionComponentProps = {
     sectionId?: string;
