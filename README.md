@@ -19,3 +19,7 @@ Run:
 ```bash
 npm run dev
 ```
+
+## License
+
+The project is licensed under the [MIT License](./LICENSE).
