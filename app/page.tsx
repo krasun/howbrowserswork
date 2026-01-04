@@ -28,7 +28,7 @@ type SectionConfig = {
 const sections: SectionConfig[] = [
     {
         id: "about",
-        title: "About the guide",
+        title: "Why?",
         Component: AboutSection,
     },
     {
