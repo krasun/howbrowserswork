@@ -115,7 +115,7 @@ export default function IndexPage() {
                         <Footer />
                     </div>
                 </div>
-                <div className="hidden lg:fixed lg:right-20 lg:top-16 lg:block lg:w-80">
+                <div className="hidden 2xl:fixed  2xl:right-20 2xl:top-16 2xl:block 2xl:w-80 px-4">
                     <Sidebar sections={sidebarSections} />
                 </div>
             </div>

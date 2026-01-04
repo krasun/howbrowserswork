@@ -70,7 +70,7 @@ export default function MobileToc({
     return (
         <div
             className={[
-                "fixed left-0 right-0 top-0 z-40 lg:hidden transition-[transform,opacity] duration-300",
+                "fixed left-0 right-0 top-0 z-40 2xl:hidden transition-[transform,opacity] duration-300",
                 hasScrolled
                     ? "translate-y-0 opacity-100"
                     : "-translate-y-full opacity-0 pointer-events-none",
@@ -95,17 +95,12 @@ export default function MobileToc({
                         aria-expanded={isOpen}
                         aria-controls="mobile-toc-panel"
                     >
-                        {isOpen ? "Close" : "Menu"}
-                        <span
-                            aria-hidden="true"
-                            className="relative h-3 w-4"
-                        >
+                        {isOpen ? "Close" : "Contents"}
+                        <span aria-hidden="true" className="relative h-3 w-4">
                             <span
                                 className={[
                                     "absolute left-0 top-0 h-[2px] w-full rounded bg-slate-600 transition",
-                                    isOpen
-                                        ? "translate-y-[5px] rotate-45"
-                                        : "",
+                                    isOpen ? "translate-y-[5px] rotate-45" : "",
                                 ]
                                     .filter(Boolean)
                                     .join(" ")}
