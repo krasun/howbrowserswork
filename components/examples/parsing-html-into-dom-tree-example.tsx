@@ -81,7 +81,7 @@ export default function ParsingHtmlIntoDomTreeExample() {
         <div className="space-y-6">
             <div className="grid gap-4 lg:grid-cols-2">
                 <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4">
-                    <div className="mb-2 flex items-center justify-between text-xs font-semibold tracking-wide text-slate-400">
+                    <div className="mb-2 flex flex-wrap items-center justify-between gap-2 text-xs font-semibold tracking-wide text-slate-400">
                         <span>The HTML stream</span>
                         <Button
                             className="bg-slate-900 text-white"

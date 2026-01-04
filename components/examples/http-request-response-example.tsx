@@ -245,7 +245,7 @@ export default function HttpRequestResponseExample() {
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start">
-                    <div className="min-w-[240px] flex-1 space-y-3">
+                    <div className="min-w-0 w-full flex-1 space-y-3 lg:min-w-[240px]">
                         <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                             Browser (Client)
                         </div>
@@ -279,7 +279,7 @@ export default function HttpRequestResponseExample() {
                             </div>
                         </div>
                     </div>
-                    <div className="relative h-32 w-full min-w-[160px] lg:mt-6">
+                    <div className="relative h-32 w-full min-w-0 overflow-hidden lg:mt-6 lg:min-w-[160px]">
                         <div className="absolute top-1/2 h-1 w-full -translate-y-1/2 rounded-full bg-slate-100" />
                         <div className="absolute top-1/2 flex w-full -translate-y-1/2 items-center justify-center gap-2">
                             {Array.from({ length: 3 }).map((_, index) => (
@@ -317,7 +317,7 @@ export default function HttpRequestResponseExample() {
                             </div>
                         ) : null}
                     </div>
-                    <div className="min-w-[220px] flex-1 space-y-3">
+                    <div className="min-w-0 w-full flex-1 space-y-3 lg:min-w-[220px]">
                         <div className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
                             Server
                         </div>

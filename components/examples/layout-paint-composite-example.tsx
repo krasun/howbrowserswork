@@ -120,9 +120,10 @@ export default function LayoutPaintCompositeExample() {
                     </div>
                     <div className="mt-3 flex justify-center sm:justify-start">
                         <div
-                            className="rounded-lg border border-slate-200 px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300"
+                            className="max-w-full rounded-lg border border-slate-200 px-4 py-3 text-sm text-slate-900 shadow-sm transition-all duration-300"
                             style={{
                                 width: widths[widthIndex],
+                                maxWidth: "100%",
                                 backgroundColor: colors[colorIndex],
                             }}
                         >

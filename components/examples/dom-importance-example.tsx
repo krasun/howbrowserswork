@@ -75,7 +75,7 @@ export default function DomImportanceExample() {
         <div className="rounded-2xl border border-slate-900 bg-black p-5 text-white">
             <div className="grid gap-4 lg:grid-cols-2">
                 <div className="space-y-3">
-                    <div className="flex items-center justify-between">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
                         <div className="text-xs font-semibold text-slate-300">
                             Editable JavaScript
                         </div>

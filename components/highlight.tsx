@@ -12,7 +12,7 @@ export default function Highlight({ children, variant }: HighlightProps) {
     return (
         <span
             className={
-                "whitespace-nowrap break-keep px-2 py-1 text-sm rounded-md font-mono " +
+                "whitespace-normal break-all px-2 py-1 text-sm rounded-md font-mono sm:whitespace-nowrap sm:break-keep " +
                 (variants[variant] || "")
             }
         >

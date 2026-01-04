@@ -158,7 +158,7 @@ export default function TcpHandshakeExample() {
 
     return (
         <div className="space-y-4">
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-2 text-sm text-slate-500">
                     <span
                         className={[
@@ -198,8 +198,8 @@ export default function TcpHandshakeExample() {
                 ))}
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white px-3 py-3">
-                <div className="flex items-center gap-4">
-                    <div className="min-w-[200px] rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-center text-[11px] font-semibold text-slate-700">
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
+                    <div className="min-w-0 w-full rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-center text-[11px] font-semibold text-slate-700 lg:min-w-[200px]">
                         Your Computer
                         <div className="mt-1 rounded-md border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-600">
                             Browser
@@ -218,7 +218,7 @@ export default function TcpHandshakeExample() {
                             </div>
                         </div>
                     </div>
-                    <div className="relative h-16 w-full min-w-[120px]">
+                    <div className="relative h-16 w-full min-w-0 lg:min-w-[120px]">
                         <div className="absolute top-1/2 h-1 w-full -translate-y-1/2 rounded-full bg-slate-100" />
                         <div className="absolute top-1/2 flex w-full -translate-y-1/2 items-center justify-center gap-2">
                             {Array.from({ length: 3 }).map((_, index) => (
@@ -245,7 +245,7 @@ export default function TcpHandshakeExample() {
                             </div>
                         ) : null}
                     </div>
-                    <div className="min-w-[200px] rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-center text-[11px] font-semibold text-slate-700">
+                    <div className="min-w-0 w-full rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-center text-[11px] font-semibold text-slate-700 lg:min-w-[200px]">
                         Server
                         <div className="mt-1 rounded-md border border-slate-200 bg-white px-2 py-1 text-[10px] text-slate-500">
                             <div className="mb-1 font-semibold text-slate-600">

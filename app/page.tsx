@@ -10,6 +10,7 @@ import ParsingHtml from "@/components/sections/parsing-html";
 import ResolvingTheServerAddress from "@/components/sections/resolving-the-server-address";
 import TurningAUrlIntoAnHttpRequest from "@/components/sections/turning-a-url-into-an-http-request";
 import Sidebar from "@/components/sidebar";
+import MobileToc from "@/components/mobile-toc";
 import Link from "next/link";
 
 type SectionComponentProps = {
@@ -81,29 +82,32 @@ export default function IndexPage() {
     return (
         <SectionsProgressProvider sectionIds={sectionIds}>
             <div className="relative flex min-h-screen justify-center px-6 py-12 sm:p-16 lg:p-20">
-                <div className="w-full max-w-3xl space-y-10">
-                    <main className="flex w-full flex-col space-y-10">
-                        <div className="flex flex-col items-center gap-4 text-center sm:items-start sm:text-left">
-                            <Link href="/">
-                                <h1 className="font-serif max-w-xs text-3xl font-semibold leading-8 tracking-tight text-black dark:text-zinc-50">
-                                    How Browsers Work
-                                </h1>
-                            </Link>
-                            <p className="max-w-lg text-lg leading-8 text-zinc-600 ">
-                                An interactive guide to how browsers work.
-                            </p>
-                        </div>
-                        {sections.map(
-                            ({ Component, id, title }: SectionConfig) => (
-                                <Component
-                                    key={id}
-                                    sectionId={id}
-                                    title={title}
-                                />
-                            )
-                        )}
-                    </main>
-                    <Footer />
+                <div className="w-full max-w-3xl">
+                    <MobileToc sections={sidebarSections} />
+                    <div className="mt-8 space-y-10 lg:mt-0">
+                        <main className="flex w-full flex-col space-y-10">
+                            <div className="flex flex-col items-center gap-4 text-center sm:items-start sm:text-left">
+                                <Link href="/">
+                                    <h1 className="font-serif max-w-xs text-3xl font-semibold leading-8 tracking-tight text-black dark:text-zinc-50">
+                                        How Browsers Work
+                                    </h1>
+                                </Link>
+                                <p className="max-w-lg text-lg leading-8 text-zinc-600 ">
+                                    An interactive guide to how browsers work.
+                                </p>
+                            </div>
+                            {sections.map(
+                                ({ Component, id, title }: SectionConfig) => (
+                                    <Component
+                                        key={id}
+                                        sectionId={id}
+                                        title={title}
+                                    />
+                                )
+                            )}
+                        </main>
+                        <Footer />
+                    </div>
                 </div>
                 <div className="hidden lg:fixed lg:right-20 lg:top-16 lg:block lg:w-80">
                     <Sidebar sections={sidebarSections} />

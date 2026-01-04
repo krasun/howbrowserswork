@@ -102,7 +102,7 @@ export default function ResolveServerAddressExample() {
                 Terminal
             </div>
             <form
-                className="flex items-center gap-2 font-mono"
+                className="flex flex-wrap items-center gap-2 font-mono"
                 onSubmit={handleSubmit}
             >
                 <span className="text-slate-400">$</span>
@@ -110,12 +110,12 @@ export default function ResolveServerAddressExample() {
                 <input
                     value={normalizedHost}
                     onChange={(event) => handleChange(event.target.value)}
-                    className="min-w-0 flex-1 bg-transparent text-slate-100 placeholder:text-slate-500 focus:outline-none"
+                    className="min-w-0 basis-full flex-1 bg-transparent text-slate-100 placeholder:text-slate-500 focus:outline-none sm:basis-auto"
                     placeholder="example.com"
                     aria-label="Host name"
                 />
             </form>
-            <div className="mt-3 space-y-1 font-mono text-xs text-slate-300">
+            <div className="mt-3 space-y-1 break-words font-mono text-xs text-slate-300">
                 {isLoading ? <div>;; resolving...</div> : null}
                 {!isLoading && error ? (
                     <div className="text-red-300">{error}</div>

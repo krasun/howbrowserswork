@@ -74,7 +74,7 @@ export default function AnythingToUrlExample() {
                         .filter(Boolean)
                         .join(" ")}
                 >
-                    <div className=" tracking-wide text-slate-400">
+                    <div className="tracking-wide text-slate-400 break-words">
                         {transformKind === "direct"
                             ? "Browser sends it as-is:"
                             : "Browser transforms it into:"}{" "}
@@ -84,10 +84,13 @@ export default function AnythingToUrlExample() {
                         <Highlight variant="slate">
                             &quot;{inputValue}&quot;
                         </Highlight>
-                        <span className="text-slate-400">→</span>
+                        <span className="text-slate-400 sm:hidden">↓</span>
+                        <span className="hidden text-slate-400 sm:inline">
+                            →
+                        </span>
                         <Highlight variant="blue">{outputValue}</Highlight>
                     </div>
-                    <div className=" text-slate-400">
+                    <div className="text-slate-400 break-words">
                         {transformKind === "search"
                             ? "Transformed into a search query URL."
                             : transformKind === "url"
