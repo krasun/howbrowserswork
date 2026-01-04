@@ -87,8 +87,8 @@ const sidebarSections = sections.map(({ id, title }) => ({
 export default function IndexPage() {
     return (
         <SectionsProgressProvider sectionIds={sectionIds}>
-            <div className="relative flex min-h-screen justify-center px-6 py-12 sm:p-16 lg:p-20">
-                <div className="w-full max-w-3xl">
+            <div className="relative min-h-screen px-6 py-12 sm:p-16 lg:grid lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-20 lg:p-20">
+                <div className="mx-auto w-full max-w-4xl lg:mx-0">
                     <MobileToc sections={sidebarSections} />
                     <div className="mt-8 space-y-10 lg:mt-0">
                         <main className="flex w-full flex-col space-y-10">
@@ -115,9 +115,11 @@ export default function IndexPage() {
                         <Footer />
                     </div>
                 </div>
-                <div className="hidden lg:fixed lg:right-20 lg:top-16 lg:block lg:w-80">
-                    <Sidebar sections={sidebarSections} />
-                </div>
+                <aside className="hidden lg:block">
+                    <div className="fixed top-16 right-20 w-80">
+                        <Sidebar sections={sidebarSections} />
+                    </div>
+                </aside>
             </div>
         </SectionsProgressProvider>
     );
