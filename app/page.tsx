@@ -5,6 +5,7 @@ import BrowsersWorkWithUrls from "@/components/sections/browsers-work-with-urls"
 import EstablishingTheTcpConnection from "@/components/sections/establishing-the-tcp-connection";
 import HttpRequestAndResponse from "@/components/sections/http-request-and-response";
 import ParsingHtml from "@/components/sections/parsing-html";
+import DomImportance from "@/components/sections/dom-importance";
 import ResolvingTheServerAddress from "@/components/sections/resolving-the-server-address";
 import TurningAUrlIntoAnHttpRequest from "@/components/sections/turning-a-url-into-an-http-request";
 import Sidebar from "@/components/sidebar";
@@ -51,6 +52,11 @@ const sections: SectionConfig[] = [
         id: "parsing-html",
         title: "Parsing HTML to build the DOM tree",
         Component: ParsingHtml,
+    },
+    {
+        id: "dom-importance",
+        title: "On the importance of the DOM",
+        Component: DomImportance,
     },
     {
         id: "next-section",
