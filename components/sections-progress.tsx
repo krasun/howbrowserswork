@@ -26,6 +26,18 @@ export function SectionsProgressProvider({
         const updateActiveSection = () => {
             const offset = window.innerHeight * 0.25;
             let current: string | null = null;
+            let lastAbove: string | null = null;
+            let nextBelow: string | null = null;
+            const atBottom =
+                window.innerHeight + window.scrollY >=
+                document.documentElement.scrollHeight - 4;
+
+            if (atBottom) {
+                setActiveSectionId(
+                    sectionIds[sectionIds.length - 1] ?? null
+                );
+                return;
+            }
 
             for (const id of sectionIds) {
                 const element = document.querySelector<HTMLElement>(
@@ -33,16 +45,24 @@ export function SectionsProgressProvider({
                 );
                 if (!element) continue;
                 const rect = element.getBoundingClientRect();
-                if (rect.top - offset <= 0 && rect.bottom - offset > 0) {
+                const top = rect.top - offset;
+                const bottom = rect.bottom - offset;
+
+                if (top <= 0) {
+                    lastAbove = id;
+                }
+                if (top <= 0 && bottom > 0) {
                     current = id;
                     break;
                 }
-                if (current === null && rect.top - offset > 0) {
-                    current = id;
+                if (top > 0 && !nextBelow) {
+                    nextBelow = id;
                 }
             }
 
-            setActiveSectionId(current ?? sectionIds[0] ?? null);
+            setActiveSectionId(
+                current ?? nextBelow ?? lastAbove ?? sectionIds[0] ?? null
+            );
         };
 
         const handleScroll = () => {
