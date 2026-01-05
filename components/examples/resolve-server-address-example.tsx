@@ -106,7 +106,7 @@ export default function ResolveServerAddressExample() {
                 onSubmit={handleSubmit}
             >
                 <span className="text-slate-400">$</span>
-                <span>resolve</span>
+                <span>host</span>
                 <input
                     value={normalizedHost}
                     onChange={(event) => handleChange(event.target.value)}
