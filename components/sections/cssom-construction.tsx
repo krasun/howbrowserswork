@@ -21,19 +21,20 @@ export default function CssomConstruction({
             </p>
             <p>
                 The CSSOM resolves inheritance, calculates specificity, and determines the final computed styles 
-                for each element. Try modifying the CSS below to see how rules become CSSOM nodes:
+                for each element. This tree structure organizes rules for efficient style matching when building 
+                the render tree. Try modifying the CSS below to see how rules become CSSOM nodes:
             </p>
             <ExampleContainer>
                 <CssomConstructionExample />
             </ExampleContainer>
             <p>
-                Unlike the DOM, CSSOM construction is render-blocking. 
-                The browser must finish parsing all CSS before it can build the render tree, since any rule 
-                could affect any element through cascading and inheritance.
+                Unlike the DOM, CSSOM construction is render-blocking. The browser must finish parsing all CSS 
+                before it can build the render tree, since any rule could affect any element through cascading, 
+                inheritance, and specificity calculations.
             </p>
             <p>
-                Once both DOM and CSSOM are ready, the browser combines them into the render tree, 
-                which contains only the elements that will be painted to the screen.
+                Once both DOM and CSSOM are ready, the browser combines them into the render tree, which contains 
+                only the elements that will be painted to the screen.
             </p>
         </Section>
     );

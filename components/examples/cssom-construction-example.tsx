@@ -124,18 +124,9 @@ export default function CssomConstructionExample() {
       </div>
       
       {showCSSOM && (
-        <div className="mt-4 p-3 bg-blue-50 rounded">
-          <h5 className="font-semibold text-sm mb-2">CSSOM Features Demonstrated:</h5>
-          <ul className="text-sm space-y-1 text-gray-700 list-disc list-inside">
-            <li><strong>Selector parsing:</strong> CSS selectors become CSSOM rule objects</li>
-            <li><strong>Specificity calculation:</strong> Higher specificity rules override lower ones</li>
-            <li><strong>Property resolution:</strong> Declarations become computed style properties</li>
-            <li><strong>Tree structure:</strong> Rules are organized for efficient style matching</li>
-          </ul>
-          <div className="mt-2 text-xs text-gray-600 italic">
-            Note: Browsers use specificity scores internally but don't expose these numbers in dev tools. 
-            The CSS spec defines this scoring system to resolve conflicts between competing rules.
-          </div>
+        <div className="mt-2 text-xs text-gray-600 italic">
+          Note: Browsers use specificity scores internally but don't expose these numbers in dev tools. 
+          The CSS spec defines this scoring system to resolve conflicts between competing rules.
         </div>
       )}
     </div>
