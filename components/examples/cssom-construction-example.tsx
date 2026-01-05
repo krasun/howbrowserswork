@@ -132,6 +132,10 @@ export default function CssomConstructionExample() {
             <li>• <strong>Property resolution:</strong> Declarations become computed style properties</li>
             <li>• <strong>Tree structure:</strong> Rules are organized for efficient style matching</li>
           </ul>
+          <div className="mt-2 text-xs text-gray-600 italic">
+            Note: Browsers use specificity scores internally but don't expose these numbers in dev tools. 
+            The CSS spec defines this scoring system to resolve conflicts between competing rules.
+          </div>
         </div>
       )}
     </div>
