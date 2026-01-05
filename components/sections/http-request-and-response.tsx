@@ -1,6 +1,9 @@
+'use client';
+
 import ExampleContainer from "@/components/example-container";
 import Section from "@/components/section";
 import HttpRequestResponseExample from "@/components/examples/http-request-response-example";
+import { useTranslations } from 'next-intl';
 
 type SectionProps = {
     sectionId?: string;
@@ -11,22 +14,21 @@ export default function HttpRequestAndResponse({
     sectionId = "http-request-and-response",
     title = "HTTP requests and responses",
 }: SectionProps) {
+    const t = useTranslations('sections.httpRequestAndResponse');
+    
     return (
         <Section id={sectionId} title={title}>
             <p>
-                Once the TCP connection is established, the browser can send an
-                HTTP request to the server.
+                {t('paragraph1')}
             </p>
             <p>
-                Click the "Go" button to watch the HTTP request travel to the
-                server and the HTTP response return to the browser:
+                {t('paragraph2')}
             </p>
             <ExampleContainer>
                 <HttpRequestResponseExample />
             </ExampleContainer>
             <p>
-                When the HTTP response arrives, the browser reads the raw HTTP
-                response and starts rendering the HTML content.
+                {t('paragraph3')}
             </p>
         </Section>
     );

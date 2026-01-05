@@ -1,7 +1,10 @@
+'use client';
+
 import ExampleContainer from "@/components/example-container";
 import Highlight from "@/components/highlight";
 import Section from "@/components/section";
 import LayoutPaintCompositeExample from "@/components/examples/layout-paint-composite-example";
+import { useTranslations } from 'next-intl';
 
 type SectionProps = {
     sectionId?: string;
@@ -12,27 +15,27 @@ export default function LayoutPaintComposite({
     sectionId = "layout-paint-composite",
     title = "Layout, Paint, and Composite (The Rendering Pipeline)",
 }: SectionProps) {
+    const t = useTranslations('sections.layoutPaintComposite');
+    
     return (
         <Section id={sectionId} title={title}>
             <p>
-                Once the DOM and CSS are ready, the browser runs the rendering
-                pipeline: <Highlight variant="blue">Layout</Highlight> (reflow)
-                to calculate sizes and positions,
-                <Highlight variant="slate">Paint</Highlight> to fill pixels,
-                then <Highlight variant="blue">Composite</Highlight> to stitch
-                layers together on the GPU.
+                {t('paragraph1Start')}
+                <Highlight variant="blue">{t('paragraph1Layout')}</Highlight>
+                {t('paragraph1Middle1')}
+                <Highlight variant="slate">{t('paragraph1Paint')}</Highlight>
+                {t('paragraph1Middle2')}
+                <Highlight variant="blue">{t('paragraph1Composite')}</Highlight>
+                {t('paragraph1End')}
             </p>
             <p>
-                Not every change reruns every stage. Changing colors usually
-                repaints, while changing sizes forces layout and paint to
-                recompute.
+                {t('paragraph2')}
             </p>
             <ExampleContainer>
                 <LayoutPaintCompositeExample />
             </ExampleContainer>
             <p>
-                This is why layout-heavy pages feel slower: more work needs to
-                happen before the next frame can be shown.
+                {t('paragraph3')}
             </p>
         </Section>
     );

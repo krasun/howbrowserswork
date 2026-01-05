@@ -13,6 +13,7 @@ import Sidebar from "@/components/sidebar";
 import MobileToc from "@/components/mobile-toc";
 import Link from "next/link";
 import SummarySection from "@/components/sections/summary";
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 type SectionComponentProps = {
     sectionId?: string;
@@ -21,70 +22,82 @@ type SectionComponentProps = {
 
 type SectionConfig = {
     id: string;
-    title: string;
+    titleKey: string;
     Component: (props: SectionComponentProps) => React.ReactNode;
 };
 
-const sections: SectionConfig[] = [
+const sectionsConfig: SectionConfig[] = [
     {
         id: "about",
-        title: "Why?",
+        titleKey: "sections.about.title",
         Component: AboutSection,
     },
     {
         id: "browsers-work-with-urls",
-        title: "Browsers work with URLs",
+        titleKey: "sections.browsersWorkWithUrls.title",
         Component: BrowsersWorkWithUrls,
     },
     {
         id: "turning-a-url-into-an-http-request",
-        title: "Turning a URL into an HTTP request",
+        titleKey: "sections.turningUrlIntoHttpRequest.title",
         Component: TurningAUrlIntoAnHttpRequest,
     },
     {
         id: "resolving-the-server-address",
-        title: "Resolving the server address",
+        titleKey: "sections.resolvingServerAddress.title",
         Component: ResolvingTheServerAddress,
     },
     {
         id: "establishing-the-tcp-connection",
-        title: "Establishing the TCP connection",
+        titleKey: "sections.establishingTcpConnection.title",
         Component: EstablishingTheTcpConnection,
     },
     {
         id: "http-request-and-response",
-        title: "HTTP requests and responses",
+        titleKey: "sections.httpRequestAndResponse.title",
         Component: HttpRequestAndResponse,
     },
     {
         id: "parsing-html",
-        title: "Parsing HTML to build the DOM tree",
+        titleKey: "sections.parsingHtml.title",
         Component: ParsingHtml,
     },
     {
         id: "dom-importance",
-        title: "On the importance of the DOM",
+        titleKey: "sections.domImportance.title",
         Component: DomImportance,
     },
     {
         id: "layout-paint-composite",
-        title: "Layout, Paint, and Composite",
+        titleKey: "sections.layoutPaintComposite.title",
         Component: LayoutPaintComposite,
     },
     {
         id: "summary",
-        title: "Summary",
+        titleKey: "sections.summary.title",
         Component: SummarySection,
     },
 ];
 
-const sectionIds = sections.map((section) => section.id);
-const sidebarSections = sections.map(({ id, title }) => ({
-    id,
-    title,
-}));
+type Props = {
+    params: Promise<{ locale: string }>;
+};
 
-export default function IndexPage() {
+export default async function IndexPage({ params }: Props) {
+    const { locale } = await params;
+    
+    // Enable static rendering
+    setRequestLocale(locale);
+    
+    const t = await getTranslations({ locale });
+    
+    const sectionIds = sectionsConfig.map((section) => section.id);
+    
+    const sidebarSections = sectionsConfig.map(({ id, titleKey }) => ({
+        id,
+        title: t(titleKey),
+    }));
+
     return (
         <SectionsProgressProvider sectionIds={sectionIds}>
             <div className="relative flex min-h-screen justify-center px-6 py-12 sm:p-16 lg:p-20">
@@ -93,21 +106,19 @@ export default function IndexPage() {
                     <div className="mt-8 space-y-10 lg:mt-0">
                         <main className="flex w-full flex-col space-y-10">
                             <div className="flex flex-col items-center gap-4 text-center sm:items-start sm:text-left">
-                                <Link href="/">
-                                    <h1 className="font-serif max-w-xs text-3xl font-semibold leading-8 tracking-tight text-black">
-                                        How Browsers Work
-                                    </h1>
-                                </Link>
+                                <h1 className="font-serif max-w-md text-3xl font-semibold leading-9 tracking-tight text-black">
+                                    {t('home.title')}
+                                </h1>
                                 <p className="max-w-lg text-lg leading-8 text-zinc-600 ">
-                                    An interactive guide to how browsers work.
+                                    {t('home.subtitle')}
                                 </p>
                             </div>
-                            {sections.map(
-                                ({ Component, id, title }: SectionConfig) => (
+                            {sectionsConfig.map(
+                                ({ Component, id, titleKey }: SectionConfig) => (
                                     <Component
                                         key={id}
                                         sectionId={id}
-                                        title={title}
+                                        title={t(titleKey)}
                                     />
                                 )
                             )}
@@ -122,3 +133,4 @@ export default function IndexPage() {
         </SectionsProgressProvider>
     );
 }
+

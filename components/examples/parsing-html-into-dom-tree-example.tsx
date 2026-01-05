@@ -1,52 +1,61 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "../button";
+import { useTranslations } from "next-intl";
 
-const exampleTitle = "Example Domain";
-const exampleDescription = "An example paragraph.";
-const exampleLink = "https://example.com";
-
-const htmlLines = [
+const getHtmlLines = (title: string, description: string, linkText: string) => [
     "<!doctype html>",
     "<html>",
     "  <head>",
-    `    <title>${exampleTitle}</title>`,
+    `    <title>${title}</title>`,
     "  </head>",
     "  <body>",
     "    <main>",
-    `      <h1 style="color: red;">${exampleTitle}</h1>`,
-    `      <p>${exampleDescription}</p>`,
+    `      <h1 style="color: red;">${title}</h1>`,
+    `      <p>${description}</p>`,
     `      <p>
-             <a href="${exampleLink}">An example link</a>
+             <a href="https://example.com">${linkText}</a>
            </p>`,
     "    </main>",
     "  </body>",
     "</html>",
 ];
 
-const domLines = [
+const getDomLines = (title: string, description: string, linkText: string) => [
     "Document",
     "|- <!doctype html>",
     "`- html",
     "   |- head",
     "   |  `- title",
-    `   |     \`- "${exampleTitle}"`,
+    `   |     \`- "${title}"`,
     "   `- body",
     "      `- main",
     "         |- h1 (style: color: red)",
-    `         |  \`- "${exampleTitle}"`,
+    `         |  \`- "${title}"`,
     "         |- p",
-    `         |  \`- "${exampleDescription}"`,
+    `         |  \`- "${description}"`,
     "         `- p",
-    `            \`- a (href="${exampleLink}")`,
-    '               `- "An example link"',
+    `            \`- a (href="https://example.com")`,
+    `               \`- "${linkText}"`,
 ];
 
 const domLineProgress = [2, 3, 4, 6, 6, 7, 8, 10, 12, 15, 15, 15, 15];
 const stepDurationMs = 900;
 
 export default function ParsingHtmlIntoDomTreeExample() {
+    const t = useTranslations("examples.parsingHtml");
+    
+    const htmlLines = useMemo(
+        () => getHtmlLines(t("exampleTitle"), t("exampleDescription"), t("exampleLink")),
+        [t]
+    );
+    
+    const domLines = useMemo(
+        () => getDomLines(t("exampleTitle"), t("exampleDescription"), t("exampleLink")),
+        [t]
+    );
+    
     const [activeLineIndex, setActiveLineIndex] = useState(-1);
     const [isParsing, setIsParsing] = useState(false);
 
@@ -67,7 +76,7 @@ export default function ParsingHtmlIntoDomTreeExample() {
         }, stepDurationMs);
 
         return () => window.clearTimeout(timeout);
-    }, [activeLineIndex, isParsing]);
+    }, [activeLineIndex, isParsing, htmlLines]);
 
     const visibleDomLines =
         activeLineIndex >= 0 ? domLineProgress[activeLineIndex] ?? 0 : 0;
@@ -82,13 +91,13 @@ export default function ParsingHtmlIntoDomTreeExample() {
             <div className="grid gap-4 lg:grid-cols-2">
                 <div className="rounded-2xl border border-slate-200 bg-white px-4 py-4">
                     <div className="mb-2 flex flex-wrap items-center justify-between gap-2 text-xs font-semibold tracking-wide text-slate-400">
-                        <span>The HTML stream</span>
+                        <span>{t("htmlStream")}</span>
                         <Button
                             className="bg-slate-900 text-white"
                             onClick={handleParse}
                             disabled={isParsing}
                         >
-                            {isParsing ? "Parsing..." : "Parse"}
+                            {isParsing ? t("parsing") : t("parse")}
                         </Button>
                     </div>
                     <pre className="w-full whitespace-pre-wrap rounded-lg bg-slate-100 px-3 py-2 text-left font-mono text-xs text-slate-700">

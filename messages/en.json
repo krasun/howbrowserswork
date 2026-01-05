@@ -1,0 +1,169 @@
+{
+  "metadata": {
+    "title": "How Browsers Work",
+    "description": "A guide on how browsers work."
+  },
+  "home": {
+    "title": "How Browsers Work",
+    "subtitle": "An interactive guide to how browsers work."
+  },
+  "sections": {
+    "about": {
+      "title": "Why?",
+      "paragraph1": "The guide is for engineers and curious people who use the web every day, but never built a mental model of how browsers work.",
+      "paragraph2": "I find most guides too technical, too detailed, or too shallow, so I have decided to take a different approach.",
+      "paragraph3": "I built the guide with many tiny interactive examples you can play with to help you go get through the technical details and ",
+      "paragraph3Bold": "build an intuition of how browsers work",
+      "paragraph4": "To keep it short and straight to the point, many critical details are omitted like different versions of the HTTP protocol, SSL, TLS, nuances of the DNS, and many more.",
+      "paragraph5Start": "I made the guide ",
+      "paragraph5Link": "open source",
+      "paragraph5End": ". Feel free to suggest improvements by creating an issue or a pull request."
+    },
+    "browsersWorkWithUrls": {
+      "title": "Browsers work with URLs",
+      "paragraph1": "You can type literally anything in the address bar. But under the hood, browsers work with URLs:",
+      "listItem1Start": "A random text like ",
+      "listItem1Pizza": "pizza",
+      "listItem1Middle": " will be transformed into a \"search\" URL like ",
+      "listItem1Google": "https://google.com/search?q=pizza",
+      "listItem1Or": " (or ",
+      "listItem1DuckDuckGo": "https://duckduckgo.com/?q=pizza",
+      "listItem1End": " depending on your preferences).",
+      "listItem2Start": "A domain name like ",
+      "listItem2Domain": "example.com",
+      "listItem2Middle": " will be normalized as a full URL: ",
+      "listItem2Url": "https://example.com",
+      "paragraph2": "To see how this works in practice, type something in the address bar and press Enter (or click the \"Go\" button):"
+    },
+    "turningUrlIntoHttpRequest": {
+      "title": "Turning a URL into an HTTP request",
+      "paragraph1": "Once we know the exact URL we want to visit, we can send a request to the server to fetch the resource and display it in the browser. Browsers communicate with servers using the HTTP protocol.",
+      "paragraph2": "To see how a URL is translated into an HTTP request format, enter a full URL like https://example.com and press Enter (or click the \"Go\" button):",
+      "paragraph3": "HTTP requests have headers in the format like:",
+      "paragraph4Start": "One of the headers is the host header. It is used to identify the server to which the request is sent: ",
+      "paragraph4End": "."
+    },
+    "resolvingServerAddress": {
+      "title": "Resolving the server address",
+      "paragraph1Start": "Browsers can't send requests to names like ",
+      "paragraph1Domain": "example.com",
+      "paragraph1End": ".",
+      "paragraph2": "Computers talk to IP addresses, so the browser first asks the DNS system to resolve the domain name into an IP address before it can connect to the server and send the HTTP request.",
+      "paragraph3": "Type a domain name in the input and press Enter to resolve it into an IP address:"
+    },
+    "establishingTcpConnection": {
+      "title": "Establishing the TCP connection",
+      "paragraph1": "After DNS gives the browser an IP address, it still needs a reliable connection to the server. TCP is the protocol that sets up this connection before any HTTP data is sent.",
+      "paragraph2": "TCP establishes the connection using a three-step handshake that confirms both sides are ready to send and receive data.",
+      "paragraph3": "These numbers are how the client and the server keep track of the conversation. They count bytes, so both sides agree on where the data stream starts and what should come next. If some data doesn't arrive, the sender can see the gap and retransmit the missing bytes. This is how TCP keeps data ordered and reliable once the connection is established.",
+      "paragraph4": "Start sending packets and try to disrupt the network to see what happens."
+    },
+    "httpRequestAndResponse": {
+      "title": "HTTP requests and responses",
+      "paragraph1": "Once the TCP connection is established, the browser can send an HTTP request to the server.",
+      "paragraph2": "Click the \"Go\" button to watch the HTTP request travel to the server and the HTTP response return to the browser:",
+      "paragraph3": "When the HTTP response arrives, the browser reads the raw HTTP response and starts rendering the HTML content."
+    },
+    "parsingHtml": {
+      "title": "Parsing HTML to build the DOM tree",
+      "paragraph1Start": "After the HTTP response arrives, the browser separates the headers from the body and feeds the HTML bytes into the parser. The parser turns tags like ",
+      "paragraph1H1": "&lt;h1&gt;",
+      "paragraph1Middle": " into tokens and builds a ",
+      "paragraph1Dom": "DOM",
+      "paragraph1End": " tree.",
+      "paragraph2": "Click the \"Parse\" button to watch the HTML stream being parsed into the DOM tree:",
+      "paragraph3Start": "Parsing is streaming and error-tolerant: the browser starts building nodes before the full document is downloaded, and it inserts missing tags to keep the tree valid. When a ",
+      "paragraph3Script": "&lt;script&gt;",
+      "paragraph3End": " tag appears, parsing may pause so the script can run.",
+      "paragraph4": "The DOM tree then combines with CSS to produce the render tree that layout and paint use to draw pixels."
+    },
+    "domImportance": {
+      "title": "On the importance of the DOM",
+      "paragraph1Start": "The ",
+      "paragraph1Dom": "DOM",
+      "paragraph1End": " is the browser's in-memory model of the document. It is the shared contract between the HTML parser, CSS selector engine, and JavaScript runtime, so changes to it immediately affect layout, styling, and what users can interact with.",
+      "paragraph2": "The DOM powers everything from query selection to dynamic styling and event handling. Try editing the script and watch how the DOM changes on the right."
+    },
+    "layoutPaintComposite": {
+      "title": "Layout, Paint, and Composite",
+      "paragraph1Start": "Once the DOM and CSS are ready, the browser runs the rendering pipeline: ",
+      "paragraph1Layout": "Layout",
+      "paragraph1Middle1": " (reflow) to calculate sizes and positions, ",
+      "paragraph1Paint": "Paint",
+      "paragraph1Middle2": " to fill pixels, then ",
+      "paragraph1Composite": "Composite",
+      "paragraph1End": " to stitch layers together on the GPU.",
+      "paragraph2": "Not every change reruns every stage. Changing colors usually repaints, while changing sizes forces layout and paint to recompute.",
+      "paragraph3": "This is why layout-heavy pages feel slower: more work needs to happen before the next frame can be shown."
+    },
+    "summary": {
+      "title": "Summary",
+      "paragraph1": "That is it! If you completed all the examples, you should have a clear mental model of how browsers work.",
+      "paragraph2": "Thank you for reading the guide, I hope you enjoyed it."
+    }
+  },
+  "footer": {
+    "feedbackStart": "If you have any feedback or suggestions, ",
+    "openSourceLink": "the guide is open source",
+    "feedbackMiddle": ". Feel free to ",
+    "createIssueLink": "create an issue",
+    "feedbackEnd": " or open a pull request."
+  },
+  "examples": {
+    "anythingToUrl": {
+      "placeholder": "Try \"pizza\" or \"example.com\".",
+      "sendsAsIs": "Browser sends it as-is:",
+      "transforms": "Browser transforms it into:",
+      "searchQuery": "Transformed into a search query URL.",
+      "directUrl": "Transformed into a direct URL.",
+      "noTransform": "No transformation needed."
+    },
+    "tcpHandshake": {
+      "disconnected": "Disconnected",
+      "connecting": "Connecting...",
+      "retrying": "Retrying",
+      "connected": "Connected",
+      "disconnect": "Disconnect",
+      "sendFirstPacket": "Send the first packet",
+      "confirmClientPacket": "Confirm the client packet",
+      "confirmServerPacket": "Confirm the server packet",
+      "synDescription": "SYN: Client sends its sequence number (seq=1000) to open a connection.",
+      "synAckDescription": "SYN-ACK: Server acknowledges the packet by adding its own sequence number (seq=5000) and acknowledging the client sequence number by incrementing it by 1 (ack=1001).",
+      "ackDescription": "ACK: Client confirms the server number by incrementing it by 1 (ack=5001) and the connection is ready.",
+      "yourComputer": "Your Computer",
+      "browser": "Browser",
+      "state": "State",
+      "server": "Server",
+      "packetsTravel": "Packets travel over the network"
+    },
+    "parsingHtml": {
+      "htmlStream": "The HTML stream",
+      "parse": "Parse",
+      "parsing": "Parsing...",
+      "exampleTitle": "Example Domain",
+      "exampleDescription": "An example paragraph.",
+      "exampleLink": "An example link"
+    },
+    "layoutPaintComposite": {
+      "changeColor": "Change color",
+      "changeWidth": "Change width",
+      "clickToSee": "Click a change to see which stages rerun.",
+      "rerunsPaint": "Reruns: paint.",
+      "rerunsLayoutPaint": "Reruns: layout, then paint.",
+      "layoutTitle": "Layout",
+      "layoutDescription": "Reflow sizes + positions",
+      "paintTitle": "Paint",
+      "paintDescription": "Fill pixels into layers",
+      "compositeTitle": "Composite",
+      "compositeDescription": "Stitch layers on the GPU",
+      "domPreview": "DOM preview",
+      "heroCard": "Hero card",
+      "width": "Width",
+      "compositeAlways": "Composite always blends layers into the final frame."
+    }
+  },
+  "languageSwitcher": {
+    "label": "Language"
+  }
+}
+

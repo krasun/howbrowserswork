@@ -1,7 +1,10 @@
+'use client';
+
 import ExampleContainer from "@/components/example-container";
 import AnythingToUrlExample from "@/components/examples/anything-to-url-example";
 import Highlight from "@/components/highlight";
 import Section from "@/components/section";
+import { useTranslations } from 'next-intl';
 
 type SectionProps = {
     sectionId?: string;
@@ -12,36 +15,36 @@ export default function BrowsersWorkWithUrls({
     sectionId = "browsers-work-with-urls",
     title = "Browsers work with URLs",
 }: SectionProps) {
+    const t = useTranslations('sections.browsersWorkWithUrls');
+    
     return (
         <Section id={sectionId} title={title}>
             <p>
-                You can type literally anything in the address bar. But under
-                the hood, browsers work with URLs:
+                {t('paragraph1')}
             </p>
             <ul className="list-disc list-inside leading-7">
                 <li>
-                    A random text like{" "}
-                    <Highlight variant="slate">pizza</Highlight> will be
-                    transformed into a "search" URL like{" "}
+                    {t('listItem1Start')}
+                    <Highlight variant="slate">{t('listItem1Pizza')}</Highlight>
+                    {t('listItem1Middle')}
                     <Highlight variant="blue">
-                        https://google.com/search?q=pizza
-                    </Highlight>{" "}
-                    (or{" "}
+                        {t('listItem1Google')}
+                    </Highlight>
+                    {t('listItem1Or')}
                     <Highlight variant="blue">
-                        https://duckduckgo.com/?q=pizza
-                    </Highlight>{" "}
-                    depending on your preferences).
+                        {t('listItem1DuckDuckGo')}
+                    </Highlight>
+                    {t('listItem1End')}
                 </li>
                 <li>
-                    A domain name like{" "}
-                    <Highlight variant="slate">example.com</Highlight> will be
-                    normalized as a full URL:{" "}
-                    <Highlight variant="blue">https://example.com</Highlight>
+                    {t('listItem2Start')}
+                    <Highlight variant="slate">{t('listItem2Domain')}</Highlight>
+                    {t('listItem2Middle')}
+                    <Highlight variant="blue">{t('listItem2Url')}</Highlight>
                 </li>
             </ul>
             <p>
-                To see how this works in practice, type something in the address
-                bar and press <kbd>Enter</kbd> (or click the "Go" button):
+                {t('paragraph2')}
             </p>
             <ExampleContainer>
                 <AnythingToUrlExample />

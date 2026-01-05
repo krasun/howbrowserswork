@@ -1,0 +1,169 @@
+{
+  "metadata": {
+    "title": "Cómo funcionan los navegadores",
+    "description": "Una guía sobre cómo funcionan los navegadores."
+  },
+  "home": {
+    "title": "Cómo funcionan los navegadores",
+    "subtitle": "Una guía interactiva sobre cómo funcionan los navegadores."
+  },
+  "sections": {
+    "about": {
+      "title": "¿Por qué?",
+      "paragraph1": "Esta guía está dirigida a ingenieros y personas curiosas que usan la web todos los días, pero nunca han construido un modelo mental de cómo funcionan los navegadores.",
+      "paragraph2": "Encuentro que la mayoría de las guías son demasiado técnicas, demasiado detalladas o demasiado superficiales, así que he decidido adoptar un enfoque diferente.",
+      "paragraph3": "Construí esta guía con muchos pequeños ejemplos interactivos con los que puedes jugar para ayudarte a superar los detalles técnicos y ",
+      "paragraph3Bold": "desarrollar una intuición de cómo funcionan los navegadores",
+      "paragraph4": "Para mantenerlo breve y directo, se omiten muchos detalles críticos como las diferentes versiones del protocolo HTTP, SSL, TLS, las sutilezas del DNS y muchos más.",
+      "paragraph5Start": "Hice esta guía ",
+      "paragraph5Link": "de código abierto",
+      "paragraph5End": ". Siéntete libre de sugerir mejoras creando un issue o una pull request."
+    },
+    "browsersWorkWithUrls": {
+      "title": "Los navegadores funcionan con URLs",
+      "paragraph1": "Puedes escribir literalmente cualquier cosa en la barra de direcciones. Pero bajo el capó, los navegadores funcionan con URLs:",
+      "listItem1Start": "Un texto aleatorio como ",
+      "listItem1Pizza": "pizza",
+      "listItem1Middle": " se transformará en una URL de \"búsqueda\" como ",
+      "listItem1Google": "https://google.com/search?q=pizza",
+      "listItem1Or": " (o ",
+      "listItem1DuckDuckGo": "https://duckduckgo.com/?q=pizza",
+      "listItem1End": " según tus preferencias).",
+      "listItem2Start": "Un nombre de dominio como ",
+      "listItem2Domain": "example.com",
+      "listItem2Middle": " se normalizará como una URL completa: ",
+      "listItem2Url": "https://example.com",
+      "paragraph2": "Para ver cómo funciona esto en la práctica, escribe algo en la barra de direcciones y presiona Enter (o haz clic en el botón \"Go\"):"
+    },
+    "turningUrlIntoHttpRequest": {
+      "title": "Convertir una URL en una solicitud HTTP",
+      "paragraph1": "Una vez que conocemos la URL exacta que queremos visitar, podemos enviar una solicitud al servidor para obtener el recurso y mostrarlo en el navegador. Los navegadores se comunican con los servidores usando el protocolo HTTP.",
+      "paragraph2": "Para ver cómo se traduce una URL en formato de solicitud HTTP, ingresa una URL completa como https://example.com y presiona Enter (o haz clic en el botón \"Go\"):",
+      "paragraph3": "Las solicitudes HTTP tienen encabezados con el siguiente formato:",
+      "paragraph4Start": "Uno de los encabezados es el encabezado host. Se utiliza para identificar el servidor al que se envía la solicitud: ",
+      "paragraph4End": "."
+    },
+    "resolvingServerAddress": {
+      "title": "Resolver la dirección del servidor",
+      "paragraph1Start": "Los navegadores no pueden enviar solicitudes a nombres como ",
+      "paragraph1Domain": "example.com",
+      "paragraph1End": ".",
+      "paragraph2": "Las computadoras hablan con direcciones IP, por lo que el navegador primero le pide al sistema DNS que resuelva el nombre de dominio en una dirección IP antes de poder conectarse al servidor y enviar la solicitud HTTP.",
+      "paragraph3": "Escribe un nombre de dominio en la entrada y presiona Enter para resolverlo en una dirección IP:"
+    },
+    "establishingTcpConnection": {
+      "title": "Establecer la conexión TCP",
+      "paragraph1": "Después de que DNS le da al navegador una dirección IP, todavía necesita una conexión confiable con el servidor. TCP es el protocolo que establece esta conexión antes de que se envíen datos HTTP.",
+      "paragraph2": "TCP establece la conexión usando un handshake de tres pasos que confirma que ambos lados están listos para enviar y recibir datos.",
+      "paragraph3": "Estos números son la forma en que el cliente y el servidor hacen un seguimiento de la conversación. Cuentan bytes, por lo que ambos lados acuerdan dónde comienza el flujo de datos y qué debe venir después. Si algunos datos no llegan, el remitente puede ver el vacío y retransmitir los bytes faltantes. Así es como TCP mantiene los datos ordenados y confiables una vez establecida la conexión.",
+      "paragraph4": "Comienza a enviar paquetes e intenta interrumpir la red para ver qué sucede."
+    },
+    "httpRequestAndResponse": {
+      "title": "Solicitudes y respuestas HTTP",
+      "paragraph1": "Una vez que se establece la conexión TCP, el navegador puede enviar una solicitud HTTP al servidor.",
+      "paragraph2": "Haz clic en el botón \"Go\" para ver cómo la solicitud HTTP viaja al servidor y la respuesta HTTP regresa al navegador:",
+      "paragraph3": "Cuando llega la respuesta HTTP, el navegador lee la respuesta HTTP sin procesar y comienza a renderizar el contenido HTML."
+    },
+    "parsingHtml": {
+      "title": "Analizar HTML para construir el árbol DOM",
+      "paragraph1Start": "Después de que llega la respuesta HTTP, el navegador separa los encabezados del cuerpo y alimenta los bytes HTML al analizador. El analizador convierte etiquetas como ",
+      "paragraph1H1": "&lt;h1&gt;",
+      "paragraph1Middle": " en tokens y construye un árbol ",
+      "paragraph1Dom": "DOM",
+      "paragraph1End": ".",
+      "paragraph2": "Haz clic en el botón \"Analizar\" para ver cómo se analiza el flujo HTML en el árbol DOM:",
+      "paragraph3Start": "El análisis es en streaming y tolerante a errores: el navegador comienza a construir nodos antes de que se descargue el documento completo, e inserta etiquetas faltantes para mantener el árbol válido. Cuando aparece una etiqueta ",
+      "paragraph3Script": "&lt;script&gt;",
+      "paragraph3End": ", el análisis puede pausarse para que el script pueda ejecutarse.",
+      "paragraph4": "El árbol DOM luego se combina con CSS para producir el árbol de renderizado que layout y paint usan para dibujar píxeles."
+    },
+    "domImportance": {
+      "title": "Sobre la importancia del DOM",
+      "paragraph1Start": "El ",
+      "paragraph1Dom": "DOM",
+      "paragraph1End": " es el modelo en memoria del documento del navegador. Es el contrato compartido entre el analizador HTML, el motor de selectores CSS y el runtime de JavaScript, por lo que los cambios en él afectan inmediatamente el diseño, el estilo y con qué pueden interactuar los usuarios.",
+      "paragraph2": "El DOM impulsa todo, desde la selección de consultas hasta el estilo dinámico y el manejo de eventos. Intenta editar el script y observa cómo cambia el DOM a la derecha."
+    },
+    "layoutPaintComposite": {
+      "title": "Layout, Paint y Composite",
+      "paragraph1Start": "Una vez que el DOM y el CSS están listos, el navegador ejecuta el pipeline de renderizado: ",
+      "paragraph1Layout": "Layout",
+      "paragraph1Middle1": " (reflow) para calcular tamaños y posiciones, ",
+      "paragraph1Paint": "Paint",
+      "paragraph1Middle2": " para llenar píxeles, luego ",
+      "paragraph1Composite": "Composite",
+      "paragraph1End": " para unir capas en la GPU.",
+      "paragraph2": "No todos los cambios vuelven a ejecutar todas las etapas. Cambiar colores generalmente repinta, mientras que cambiar tamaños fuerza el layout y paint a recalcular.",
+      "paragraph3": "Por eso las páginas con mucho layout se sienten más lentas: se necesita más trabajo antes de que se pueda mostrar el siguiente frame."
+    },
+    "summary": {
+      "title": "Resumen",
+      "paragraph1": "¡Eso es todo! Si completaste todos los ejemplos, deberías tener un modelo mental claro de cómo funcionan los navegadores.",
+      "paragraph2": "Gracias por leer la guía, espero que la hayas disfrutado."
+    }
+  },
+  "footer": {
+    "feedbackStart": "Si tienes algún comentario o sugerencia, ",
+    "openSourceLink": "la guía es de código abierto",
+    "feedbackMiddle": ". Siéntete libre de ",
+    "createIssueLink": "crear un issue",
+    "feedbackEnd": " o abrir una pull request."
+  },
+  "examples": {
+    "anythingToUrl": {
+      "placeholder": "Prueba \"pizza\" o \"example.com\".",
+      "sendsAsIs": "El navegador lo envía tal cual:",
+      "transforms": "El navegador lo transforma en:",
+      "searchQuery": "Transformado en una URL de búsqueda.",
+      "directUrl": "Transformado en una URL directa.",
+      "noTransform": "No se necesita transformación."
+    },
+    "tcpHandshake": {
+      "disconnected": "Desconectado",
+      "connecting": "Conectando...",
+      "retrying": "Reintentando",
+      "connected": "Conectado",
+      "disconnect": "Desconectar",
+      "sendFirstPacket": "Enviar el primer paquete",
+      "confirmClientPacket": "Confirmar el paquete del cliente",
+      "confirmServerPacket": "Confirmar el paquete del servidor",
+      "synDescription": "SYN: El cliente envía su número de secuencia (seq=1000) para abrir una conexión.",
+      "synAckDescription": "SYN-ACK: El servidor confirma el paquete agregando su propio número de secuencia (seq=5000) y confirmando el número de secuencia del cliente incrementándolo en 1 (ack=1001).",
+      "ackDescription": "ACK: El cliente confirma el número del servidor incrementándolo en 1 (ack=5001) y la conexión está lista.",
+      "yourComputer": "Tu computadora",
+      "browser": "Navegador",
+      "state": "Estado",
+      "server": "Servidor",
+      "packetsTravel": "Los paquetes viajan por la red"
+    },
+    "parsingHtml": {
+      "htmlStream": "El flujo HTML",
+      "parse": "Analizar",
+      "parsing": "Analizando...",
+      "exampleTitle": "Dominio de ejemplo",
+      "exampleDescription": "Un párrafo de ejemplo.",
+      "exampleLink": "Un enlace de ejemplo"
+    },
+    "layoutPaintComposite": {
+      "changeColor": "Cambiar color",
+      "changeWidth": "Cambiar ancho",
+      "clickToSee": "Haz clic en un cambio para ver qué etapas se vuelven a ejecutar.",
+      "rerunsPaint": "Se vuelve a ejecutar: paint.",
+      "rerunsLayoutPaint": "Se vuelve a ejecutar: layout, luego paint.",
+      "layoutTitle": "Layout",
+      "layoutDescription": "Recalcula tamaños + posiciones",
+      "paintTitle": "Paint",
+      "paintDescription": "Llena píxeles en capas",
+      "compositeTitle": "Composite",
+      "compositeDescription": "Une capas en la GPU",
+      "domPreview": "Vista previa del DOM",
+      "heroCard": "Tarjeta principal",
+      "width": "Ancho",
+      "compositeAlways": "Composite siempre mezcla capas en el frame final."
+    }
+  },
+  "languageSwitcher": {
+    "label": "Idioma"
+  }
+}
+

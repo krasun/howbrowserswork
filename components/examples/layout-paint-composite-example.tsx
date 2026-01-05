@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Button from "@/components/button";
+import { useTranslations } from "next-intl";
 
 type Stage = "layout" | "paint" | "composite";
 
@@ -11,21 +12,21 @@ type StageConfig = {
     description: string;
 };
 
-const stages: StageConfig[] = [
+const getStages = (t: any): StageConfig[] => [
     {
         id: "layout",
-        title: "Layout",
-        description: "Reflow sizes + positions",
+        title: t("layoutTitle"),
+        description: t("layoutDescription"),
     },
     {
         id: "paint",
-        title: "Paint",
-        description: "Fill pixels into layers",
+        title: t("paintTitle"),
+        description: t("paintDescription"),
     },
     {
         id: "composite",
-        title: "Composite",
-        description: "Stitch layers on the GPU",
+        title: t("compositeTitle"),
+        description: t("compositeDescription"),
     },
 ];
 
@@ -33,12 +34,12 @@ const colors = ["#e2e8f0", "#38bdf8", "#fb923c"];
 const widths = [200, 260, 320];
 
 export default function LayoutPaintCompositeExample() {
+    const t = useTranslations("examples.layoutPaintComposite");
+    const stages = getStages(t);
     const [colorIndex, setColorIndex] = useState(0);
     const [widthIndex, setWidthIndex] = useState(0);
     const [activeStages, setActiveStages] = useState<Stage[]>([]);
-    const [status, setStatus] = useState(
-        "Click a change to see which stages rerun."
-    );
+    const [status, setStatus] = useState(t("clickToSee"));
     const timeoutRef = useRef<number | null>(null);
 
     const highlightStages = (nextStages: Stage[], message: string) => {
@@ -54,12 +55,12 @@ export default function LayoutPaintCompositeExample() {
 
     const handleColorChange = () => {
         setColorIndex((prev) => (prev + 1) % colors.length);
-        highlightStages(["paint"], "Reruns: paint.");
+        highlightStages(["paint"], t("rerunsPaint"));
     };
 
     const handleWidthChange = () => {
         setWidthIndex((prev) => (prev + 1) % widths.length);
-        highlightStages(["layout", "paint"], "Reruns: layout, then paint.");
+        highlightStages(["layout", "paint"], t("rerunsLayoutPaint"));
     };
 
     useEffect(() => {
@@ -77,13 +78,13 @@ export default function LayoutPaintCompositeExample() {
             <div className="space-y-4">
                 <div className="flex flex-wrap items-center gap-2">
                     <Button onClick={handleColorChange}>
-                        Change color
+                        {t("changeColor")}
                     </Button>
                     <Button
                         onClick={handleWidthChange}
                         className="bg-slate-900"
                     >
-                        Change width
+                        {t("changeWidth")}
                     </Button>
                 </div>
                 <div className="text-xs font-semibold text-slate-500">
@@ -116,7 +117,7 @@ export default function LayoutPaintCompositeExample() {
                 </div>
                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
                     <div className="text-xs font-semibold text-slate-500">
-                        DOM preview
+                        {t("domPreview")}
                     </div>
                     <div className="mt-3 flex justify-center sm:justify-start">
                         <div
@@ -127,15 +128,15 @@ export default function LayoutPaintCompositeExample() {
                                 backgroundColor: colors[colorIndex],
                             }}
                         >
-                            <div className="font-semibold">Hero card</div>
+                            <div className="font-semibold">{t("heroCard")}</div>
                             <div className="text-xs text-slate-700">
-                                Width: {widths[widthIndex]}px
+                                {t("width")}: {widths[widthIndex]}px
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="text-xs text-slate-500">
-                    Composite always blends layers into the final frame.
+                    {t("compositeAlways")}
                 </div>
             </div>
         </div>

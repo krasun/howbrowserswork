@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import AddressBar from "../address-bar";
 import Highlight from "../highlight";
+import { useTranslations } from "next-intl";
 
 type TransformKind = "search" | "url" | "direct";
 
@@ -27,6 +28,7 @@ const buildUrl = (value: string): { url: string; kind: TransformKind } => {
 };
 
 export default function AnythingToUrlExample() {
+    const t = useTranslations("examples.anythingToUrl");
     const [inputValue, setInputValue] = useState("");
     const [outputValue, setOutputValue] = useState("");
     const [transformKind, setTransformKind] = useState<TransformKind>("search");
@@ -76,8 +78,8 @@ export default function AnythingToUrlExample() {
                 >
                     <div className="tracking-wide text-slate-400 break-words">
                         {transformKind === "direct"
-                            ? "Browser sends it as-is:"
-                            : "Browser transforms it into:"}{" "}
+                            ? t("sendsAsIs")
+                            : t("transforms")}{" "}
                         {outputValue}
                     </div>
                     <div className="flex flex-col items-center gap-2 sm:flex-row">
@@ -92,15 +94,15 @@ export default function AnythingToUrlExample() {
                     </div>
                     <div className="text-slate-400 break-words">
                         {transformKind === "search"
-                            ? "Transformed into a search query URL."
+                            ? t("searchQuery")
                             : transformKind === "url"
-                            ? "Transformed into a direct URL."
-                            : "No transformation needed."}
+                            ? t("directUrl")
+                            : t("noTransform")}
                     </div>
                 </div>
             ) : (
                 <div className="text-sm text-slate-400">
-                    Try “pizza” or “example.com”.
+                    {t("placeholder")}
                 </div>
             )}
         </div>

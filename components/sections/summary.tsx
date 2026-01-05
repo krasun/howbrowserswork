@@ -1,4 +1,7 @@
+'use client';
+
 import Section from "../section";
+import { useTranslations } from 'next-intl';
 
 export default function SummarySection({
     sectionId = "summary",
@@ -7,13 +10,14 @@ export default function SummarySection({
     sectionId?: string;
     title?: string;
 }) {
+    const t = useTranslations('sections.summary');
+    
     return (
         <Section id={sectionId} title={title}>
             <p>
-                That is it! If you completed all the examples, you should have a
-                clear mental model of how browsers work.
+                {t('paragraph1')}
             </p>
-            <p>Thank you for reading the guide, I hope you enjoyed it.</p>
+            <p>{t('paragraph2')}</p>
         </Section>
     );
 }

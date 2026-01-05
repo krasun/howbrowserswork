@@ -1,15 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Button from "@/components/button";
+import { useTranslations } from "next-intl";
 
-const steps = [
+const getSteps = (t: any) => [
     {
         label: "SYN",
         direction: "right",
-        description:
-            "SYN: Client sends its sequence number (seq=1000) to open a connection.",
-        buttonLabel: "Send the first packet",
+        description: t("synDescription"),
+        buttonLabel: t("sendFirstPacket"),
         packetName: "SYN",
         packetMeta: "seq=1000",
         clientSeq: 1000,
@@ -20,9 +20,8 @@ const steps = [
     {
         label: "SYN-ACK",
         direction: "left",
-        description:
-            "SYN-ACK: Server acknowledges the packet by adding its own sequence number (seq=5000) and acknowledging the client sequence number by incrementing it by 1 (ack=1001).",
-        buttonLabel: "Confirm the client packet",
+        description: t("synAckDescription"),
+        buttonLabel: t("confirmClientPacket"),
         packetName: "SYN-ACK",
         packetMeta: "seq=5000 ack=1001",
         clientSeq: 1000,
@@ -33,9 +32,8 @@ const steps = [
     {
         label: "ACK",
         direction: "right",
-        description:
-            "ACK: Client confirms the server number by incrementing it by 1 (ack=5001) and the connection is ready.",
-        buttonLabel: "Confirm the server packet",
+        description: t("ackDescription"),
+        buttonLabel: t("confirmServerPacket"),
         packetName: "ACK",
         packetMeta: "seq=1001 ack=5001",
         clientSeq: 1001,
@@ -62,6 +60,8 @@ const initialSequence: SequenceState = {
 };
 
 export default function TcpHandshakeExample() {
+    const t = useTranslations("examples.tcpHandshake");
+    const steps = useMemo(() => getSteps(t), [t]);
     const [activeStep, setActiveStep] = useState(-1);
     const [connectionState, setConnectionState] =
         useState<ConnectionState>("Disconnected");
@@ -147,14 +147,23 @@ export default function TcpHandshakeExample() {
                 setConnectionState("Connected");
             }, startDelayMs + travelMs);
         }
-    }, [activeStep, packetTick]);
+    }, [activeStep, packetTick, steps]);
 
     const nextStepIndex = activeStep < 0 ? 0 : activeStep + 1;
     const nextStep = steps[nextStepIndex];
     const buttonLabel =
         activeStep < steps.length - 1 && nextStep
             ? `${nextStep.buttonLabel}`
-            : "Disconnect";
+            : t("disconnect");
+    
+    const getConnectionStateLabel = (state: ConnectionState) => {
+        switch (state) {
+            case "Disconnected": return t("disconnected");
+            case "Connecting": return t("connecting");
+            case "Retrying": return t("retrying");
+            case "Connected": return t("connected");
+        }
+    };
 
     return (
         <div className="space-y-4">
@@ -173,9 +182,7 @@ export default function TcpHandshakeExample() {
                             .join(" ")}
                     />
                     <span className="font-semibold">
-                        {connectionState == "Connecting"
-                            ? "Connecting..."
-                            : connectionState}
+                        {getConnectionStateLabel(connectionState)}
                     </span>
                 </div>
                 <Button onClick={handleConnect}>{buttonLabel}</Button>
@@ -200,13 +207,13 @@ export default function TcpHandshakeExample() {
             <div className="rounded-2xl border border-slate-200 bg-white px-3 py-3">
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
                     <div className="min-w-0 w-full rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-center text-[11px] font-semibold text-slate-700 lg:min-w-[200px]">
-                        Your Computer
+                        {t("yourComputer")}
                         <div className="mt-1 rounded-md border border-slate-200 bg-white px-2 py-1 text-[10px] font-semibold text-slate-600">
-                            Browser
+                            {t("browser")}
                         </div>
                         <div className="mt-1 rounded-md border border-slate-200 bg-white px-2 py-1 text-[10px] text-slate-500">
                             <div className="mb-1 font-semibold text-slate-600">
-                                State
+                                {t("state")}
                             </div>
                             <div className="flex items-center justify-between font-mono">
                                 <span>seq</span>
@@ -229,7 +236,7 @@ export default function TcpHandshakeExample() {
                             ))}
                         </div>
                         <div className="absolute inset-x-0 bottom-0 text-center text-[10px] tracking-widest text-slate-400">
-                            Packets travel over the network
+                            {t("packetsTravel")}
                         </div>
                         {packetPosition !== null ? (
                             <div
@@ -246,10 +253,10 @@ export default function TcpHandshakeExample() {
                         ) : null}
                     </div>
                     <div className="min-w-0 w-full rounded-lg border border-slate-200 bg-slate-50 px-2 py-2 text-center text-[11px] font-semibold text-slate-700 lg:min-w-[200px]">
-                        Server
+                        {t("server")}
                         <div className="mt-1 rounded-md border border-slate-200 bg-white px-2 py-1 text-[10px] text-slate-500">
                             <div className="mb-1 font-semibold text-slate-600">
-                                State
+                                {t("state")}
                             </div>
                             <div className="flex items-center justify-between font-mono">
                                 <span>seq</span>
