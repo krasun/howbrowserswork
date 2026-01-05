@@ -99,7 +99,7 @@ export default function CssomConstructionExample() {
                       {node.selector}
                     </div>
                     <div className="text-xs text-gray-600 mb-1">
-                      Specificity: {node.specificity}
+                      Specificity: {node.specificity} (IDs=100, classes=10, elements=1)
                     </div>
                     <div className="space-y-1">
                       {Object.entries(node.properties).map(([prop, value]) => (

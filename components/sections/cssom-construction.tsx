@@ -16,8 +16,8 @@ export default function CssomConstruction({
         <Section id={sectionId} title={title}>
             <p>
                 While the DOM represents the document structure, the browser also needs to understand styling. 
-                CSS rules are parsed into the <Highlight variant="purple">CSS Object Model (CSSOM)</Highlight> — 
-                a tree structure that mirrors the cascade and specificity rules.
+                CSS rules are parsed into the <Highlight variant="blue">CSSOM</Highlight> — 
+                a structured tree that organizes style rules by specificity and resolves inheritance.
             </p>
             <p>
                 The CSSOM resolves inheritance, calculates specificity, and determines the final computed styles 
