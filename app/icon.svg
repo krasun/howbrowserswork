@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Browser window frame -->
+  <rect x="2" y="4" width="28" height="24" rx="3" fill="#3b82f6"/>
+  
+  <!-- Browser toolbar -->
+  <rect x="2" y="4" width="28" height="7" rx="3" fill="#2563eb"/>
+  <rect x="2" y="8" width="28" height="3" fill="#2563eb"/>
+  
+  <!-- Traffic light buttons -->
+  <circle cx="6" cy="7.5" r="1.5" fill="#ef4444"/>
+  <circle cx="10" cy="7.5" r="1.5" fill="#eab308"/>
+  <circle cx="14" cy="7.5" r="1.5" fill="#22c55e"/>
+  
+  <!-- Address bar -->
+  <rect x="18" y="5.5" width="10" height="4" rx="1" fill="#ffffff" opacity="0.3"/>
+  
+  <!-- Content area (white) -->
+  <rect x="4" y="13" width="24" height="13" rx="1" fill="#ffffff"/>
+  
+  <!-- Content lines representing text/DOM -->
+  <rect x="6" y="15" width="12" height="2" rx="0.5" fill="#e2e8f0"/>
+  <rect x="6" y="19" width="20" height="2" rx="0.5" fill="#e2e8f0"/>
+  <rect x="6" y="23" width="16" height="2" rx="0.5" fill="#e2e8f0"/>
+</svg>
+
