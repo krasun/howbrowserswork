@@ -27,7 +27,7 @@ export default function CssomConstruction({
                 <CssomConstructionExample />
             </ExampleContainer>
             <p>
-                Unlike the DOM, CSSOM construction is <Highlight variant="red">render-blocking</Highlight>. 
+                Unlike the DOM, CSSOM construction is render-blocking. 
                 The browser must finish parsing all CSS before it can build the render tree, since any rule 
                 could affect any element through cascading and inheritance.
             </p>
