@@ -2,6 +2,7 @@ import Footer from "@/components/footer";
 import { SectionsProgressProvider } from "@/components/sections-progress";
 import AboutSection from "@/components/sections/about";
 import BrowsersWorkWithUrls from "@/components/sections/browsers-work-with-urls";
+import CssomConstruction from "@/components/sections/cssom-construction";
 import DomImportance from "@/components/sections/dom-importance";
 import EstablishingTheTcpConnection from "@/components/sections/establishing-the-tcp-connection";
 import HttpRequestAndResponse from "@/components/sections/http-request-and-response";
@@ -60,6 +61,11 @@ const sections: SectionConfig[] = [
         id: "parsing-html",
         title: "Parsing HTML to build the DOM tree",
         Component: ParsingHtml,
+    },
+    {
+        id: "cssom-construction",
+        title: "Building the CSSOM",
+        Component: CssomConstruction,
     },
     {
         id: "dom-importance",
